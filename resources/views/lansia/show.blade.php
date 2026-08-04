@@ -36,6 +36,7 @@
             <div class="card-body p-4">
                 <table class="table table-borderless mb-0">
                     <tr><td style="width:160px;color:var(--text-muted);font-size:0.85rem;">NIK</td><td class="fw-semibold"><span class="nik-mono">{{ $lansia->nik }}</span></td></tr>
+                    <tr><td style="width:160px;color:var(--text-muted);font-size:0.85rem;">RW</td><td class="fw-semibold">{{ $lansia->rw }}</td></tr>
                     <tr><td style="color:var(--text-muted);font-size:0.85rem;">Jenis Kelamin</td><td class="fw-semibold">{{ $lansia->jenis_kelamin }}</td></tr>
                     <tr><td style="color:var(--text-muted);font-size:0.85rem;">Tanggal Lahir</td><td class="fw-semibold">{{ $lansia->tanggal_lahir->translatedFormat('d F Y') }}</td></tr>
                     <tr><td style="color:var(--text-muted);font-size:0.85rem;">Alamat</td><td class="fw-semibold">{{ $lansia->alamat }}</td></tr>

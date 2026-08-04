@@ -22,9 +22,21 @@
                     <input type="text" name="search" class="form-control" placeholder="Cari nama, NIK, atau alamat..." value="{{ request('search') }}">
                 </div>
             </div>
+            <div class="col-md-3">
+                <select name="rw" class="form-select">
+                    <option value="">Semua RW</option>
+
+                    @foreach($daftarRw as $rw)
+                        <option value="{{ $rw }}"
+                            {{ request('rw') == $rw ? 'selected' : '' }}>
+                            RW {{ $rw }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <div class="col-md-4 d-flex gap-2">
                 <button type="submit" class="btn-accent ripple-btn">Cari</button>
-                @if(request('search'))
+                @if(request('search') || request('rw'))
                     <a href="{{ route('lansia.index') }}" class="btn-glass">Reset</a>
                 @endif
             </div>
@@ -37,6 +49,7 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>NIK</th>
+                        <th>RW</th>
                         <th>Jenis Kelamin</th>
                         <th>Usia</th>
                         <th>Keaktifan</th>
@@ -49,6 +62,7 @@
                             <td>{{ $lansias->firstItem() + $i }}</td>
                             <td class="fw-semibold">{{ $lansia->nama }}</td>
                             <td><span class="nik-mono">{{ $lansia->nik }}</span></td>
+                            <td>{{ $lansia->rw }}</td>
                             <td>{{ $lansia->jenis_kelamin }}</td>
                             <td>{{ $lansia->usia }} th</td>
                             <td>

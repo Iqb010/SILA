@@ -3,6 +3,25 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
+<form method="GET" action="{{ route('dashboard') }}" class="row mb-4">
+
+    <div class="col-md-3">
+        <select name="rw" class="form-select" onchange="this.form.submit()">
+
+            <option value="">Semua RW</option>
+
+            @foreach($daftarRw as $rw)
+                <option value="{{ $rw }}"
+                    {{ request('rw') == $rw ? 'selected' : '' }}>
+                    RW {{ $rw }}
+                </option>
+            @endforeach
+
+        </select>
+    </div>
+
+</form>
+
 <div class="row g-4 mb-4">
     <div class="col-xl-3 col-sm-6 stagger-1">
         <div class="glass-card stat-card p-3">

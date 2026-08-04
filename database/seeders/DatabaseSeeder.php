@@ -24,18 +24,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $lansiaData = [
-            ['nama' => 'Siti Aminah', 'nik' => '3201234567890001', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1955-03-15', 'alamat' => 'Jl. Melati No. 10, RT 01/RW 02', 'nomor_telepon' => '081234567801'],
-            ['nama' => 'Budi Santoso', 'nik' => '3201234567890002', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1950-07-22', 'alamat' => 'Jl. Mawar No. 5, RT 03/RW 01', 'nomor_telepon' => '081234567802'],
-            ['nama' => 'Hj. Fatimah', 'nik' => '3201234567890003', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1958-11-08', 'alamat' => 'Jl. Anggrek No. 12, RT 02/RW 03', 'nomor_telepon' => '081234567803'],
-            ['nama' => 'Ahmad Hidayat', 'nik' => '3201234567890004', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1952-01-30', 'alamat' => 'Jl. Dahlia No. 8, RT 04/RW 02', 'nomor_telepon' => '081234567804'],
-            ['nama' => 'Suryati', 'nik' => '3201234567890005', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1960-05-12', 'alamat' => 'Jl. Kenanga No. 3, RT 01/RW 04', 'nomor_telepon' => '081234567805'],
-            ['nama' => 'H. Muhammad Yusuf', 'nik' => '3201234567890006', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1948-09-25', 'alamat' => 'Jl. Flamboyan No. 15, RT 02/RW 01', 'nomor_telepon' => '081234567806'],
-            ['nama' => 'Nurjanah', 'nik' => '3201234567890007', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1957-12-03', 'alamat' => 'Jl. Bougenville No. 7, RT 03/RW 03', 'nomor_telepon' => '081234567807'],
-            ['nama' => 'Supardi', 'nik' => '3201234567890008', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1953-04-18', 'alamat' => 'Jl. Teratai No. 20, RT 05/RW 02', 'nomor_telepon' => '081234567808'],
-            ['nama' => 'Imas Komariah', 'nik' => '3201234567890009', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1959-08-14', 'alamat' => 'Jl. Seroja No. 11, RT 01/RW 03', 'nomor_telepon' => null],
-            ['nama' => 'Dedi Kuswandi', 'nik' => '3201234567890010', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1951-06-27', 'alamat' => 'Jl. Cempaka No. 9, RT 04/RW 01', 'nomor_telepon' => '081234567810'],
-            ['nama' => 'Euis Sukaesih', 'nik' => '3201234567890011', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1956-02-10', 'alamat' => 'Jl. Kamboja No. 6, RT 02/RW 04', 'nomor_telepon' => '081234567811'],
-            ['nama' => 'Ujang Supriatna', 'nik' => '3201234567890012', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1954-10-05', 'alamat' => 'Jl. Sakura No. 14, RT 03/RW 02', 'nomor_telepon' => null],
+            ['nama' => 'Siti Aminah', 'nik' => '3201234567890001', 'rw' => '01', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1955-03-15', 'alamat' => 'Jl. Melati No. 10, RT 01/RW 02', 'nomor_telepon' => '081234567801'],
+            ['nama' => 'Budi Santoso', 'nik' => '3201234567890002', 'rw' => '02', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1950-07-22', 'alamat' => 'Jl. Mawar No. 5, RT 03/RW 01', 'nomor_telepon' => '081234567802'],
+            ['nama' => 'Hj. Fatimah', 'nik' => '3201234567890003', 'rw' => '03', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1958-11-08', 'alamat' => 'Jl. Anggrek No. 12, RT 02/RW 03', 'nomor_telepon' => '081234567803'],
+            ['nama' => 'Ahmad Hidayat', 'nik' => '3201234567890004', 'rw' => '02', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1952-01-30', 'alamat' => 'Jl. Dahlia No. 8, RT 04/RW 02', 'nomor_telepon' => '081234567804'],
+            ['nama' => 'Suryati', 'nik' => '3201234567890005', 'rw' => '03', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1960-05-12', 'alamat' => 'Jl. Kenanga No. 3, RT 01/RW 04', 'nomor_telepon' => '081234567805'],
+            ['nama' => 'H. Muhammad Yusuf', 'nik' => '3201234567890006', 'rw' => '02', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1948-09-25', 'alamat' => 'Jl. Flamboyan No. 15, RT 02/RW 01', 'nomor_telepon' => '081234567806'],
+            ['nama' => 'Nurjanah', 'nik' => '3201234567890007', 'rw' => '02', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1957-12-03', 'alamat' => 'Jl. Bougenville No. 7, RT 03/RW 03', 'nomor_telepon' => '081234567807'],
+            ['nama' => 'Supardi', 'nik' => '3201234567890008', 'rw' => '01', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1953-04-18', 'alamat' => 'Jl. Teratai No. 20, RT 05/RW 02', 'nomor_telepon' => '081234567808'],
+            ['nama' => 'Imas Komariah', 'nik' => '3201234567890009', 'rw' => '01', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1959-08-14', 'alamat' => 'Jl. Seroja No. 11, RT 01/RW 03', 'nomor_telepon' => null],
+            ['nama' => 'Dedi Kuswandi', 'nik' => '3201234567890010', 'rw' => '02', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1951-06-27', 'alamat' => 'Jl. Cempaka No. 9, RT 04/RW 01', 'nomor_telepon' => '081234567810'],
+            ['nama' => 'Euis Sukaesih', 'nik' => '3201234567890011', 'rw' => '01', 'jenis_kelamin' => 'Perempuan', 'tanggal_lahir' => '1956-02-10', 'alamat' => 'Jl. Kamboja No. 6, RT 02/RW 04', 'nomor_telepon' => '081234567811'],
+            ['nama' => 'Ujang Supriatna', 'nik' => '3201234567890012', 'rw' => '02', 'jenis_kelamin' => 'Laki-laki', 'tanggal_lahir' => '1954-10-05', 'alamat' => 'Jl. Sakura No. 14, RT 03/RW 02', 'nomor_telepon' => null],
         ];
 
         foreach ($lansiaData as $i => $data) {

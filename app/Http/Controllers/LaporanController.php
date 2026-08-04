@@ -14,8 +14,14 @@ class LaporanController extends Controller
     {
         $bulan = $request->input('bulan', now()->month);
         $tahun = $request->input('tahun', now()->year);
+        $rw = $request->input('rw');
 
-        $data = $this->getLaporanData($bulan, $tahun);
+        $data = $this->getLaporanData($bulan, $tahun, $rw);
+
+        $daftarRw = Lansia::select('rw')
+            ->distinct()
+            ->orderBy('rw')
+            ->pluck('rw');
 
         $tahunList = Kegiatan::selectRaw('CAST(strftime("%Y", tanggal_kegiatan) AS INTEGER) as tahun')
             ->distinct()
@@ -30,6 +36,8 @@ class LaporanController extends Controller
             'bulan' => $bulan,
             'tahun' => $tahun,
             'tahunList' => $tahunList,
+            'daftarRw' => $daftarRw,
+            'rw' => $rw,
         ]));
     }
 
@@ -37,10 +45,12 @@ class LaporanController extends Controller
     {
         $bulan = $request->input('bulan', now()->month);
         $tahun = $request->input('tahun', now()->year);
+        $rw = $request->input('rw');
 
-        $data = $this->getLaporanData($bulan, $tahun);
+        $data = $this->getLaporanData($bulan, $tahun, $rw);
         $data['bulan'] = $bulan;
         $data['tahun'] = $tahun;
+        $data['rw'] = $rw;
 
         $namaBulan = $this->getNamaBulan($bulan);
         $data['namaBulan'] = $namaBulan;
@@ -55,8 +65,9 @@ class LaporanController extends Controller
     {
         $bulan = $request->input('bulan', now()->month);
         $tahun = $request->input('tahun', now()->year);
+        $rw = $request->input('rw');
 
-        $data = $this->getLaporanData($bulan, $tahun);
+        $data = $this->getLaporanData($bulan, $tahun, $rw);
         $namaBulan = $this->getNamaBulan($bulan);
 
         $filename = "laporan-keaktifan-lansia-{$namaBulan}-{$tahun}.csv";
@@ -94,7 +105,7 @@ class LaporanController extends Controller
         return response()->stream($callback, 200, $headers);
     }
 
-    private function getLaporanData(int $bulan, int $tahun): array
+    private function getLaporanData(int $bulan, int $tahun, $rw = null): array
     {
         $kegiatanIds = Kegiatan::whereYear('tanggal_kegiatan', $tahun)
             ->whereMonth('tanggal_kegiatan', $bulan)
@@ -102,7 +113,13 @@ class LaporanController extends Controller
 
         $totalKegiatanBulan = $kegiatanIds->count();
 
-        $lansias = Lansia::orderBy('nama')->get();
+        $query = Lansia::orderBy('nama');
+
+        if (!empty($rw)) {
+            $query->where('rw', $rw);
+        }
+
+        $lansias = $query->get();
 
         foreach ($lansias as $lansia) {
             $totalHadir = Kehadiran::where('lansia_id', $lansia->id)

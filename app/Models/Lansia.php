@@ -13,6 +13,7 @@ class Lansia extends Model
     protected $fillable = [
         'nama',
         'nik',
+        'rw',
         'jenis_kelamin',
         'tanggal_lahir',
         'alamat',
