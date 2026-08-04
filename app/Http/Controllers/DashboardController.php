@@ -10,24 +10,43 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $totalLansia = Lansia::count();
-        $totalKegiatan = Kegiatan::count();
-        $totalKehadiran = Kehadiran::where('status', 'Hadir')->count();
+        $rw = $request->rw;
 
-        $topLansia = [];
-        if ($totalLansia > 0 && $totalKegiatan > 0) {
-            $lansias = Lansia::all();
-            $totalPersentase = $lansias->sum(fn ($l) => $l->persentase_keaktifan);
-            $rataKeaktifan = round($totalPersentase / $totalLansia, 2);
+        // Query dasar
+        $lansiaQuery = Lansia::query();
 
-            // Get Top 5 Lansia Teraktif
-            $topLansia = $lansias->sortByDesc('persentase_keaktifan')->take(5);
+        if ($rw) {
+            $lansiaQuery->where('rw', $rw);
         }
 
-        $chartData = $this->getChartData();
-        $pieData = $this->getPieData();
+        $totalLansia = (clone $lansiaQuery)->count();
+        $totalKegiatan = Kegiatan::count();
+
+        $lansiaIds = (clone $lansiaQuery)->pluck('id');
+
+        $totalKehadiran = Kehadiran::whereIn('lansia_id', $lansiaIds)
+            ->where('status', 'Hadir')
+            ->count();
+
+        $lansias = (clone $lansiaQuery)->get();
+
+        $rataKeaktifan = $totalLansia > 0
+            ? round($lansias->avg('persentase_keaktifan'), 2)
+            : 0;
+
+        $topLansia = $lansias
+            ->sortByDesc('persentase_keaktifan')
+            ->take(5);
+
+        $daftarRw = Lansia::select('rw')
+            ->distinct()
+            ->orderBy('rw')
+            ->pluck('rw');
+
+        $chartData = $this->getChartData($rw);
+        $pieData = $this->getPieData($rw);
 
         return view('dashboard', compact(
             'totalLansia',
@@ -36,11 +55,12 @@ class DashboardController extends Controller
             'rataKeaktifan',
             'chartData',
             'pieData',
-            'topLansia'
+            'topLansia',
+            'daftarRw'
         ));
     }
 
-    private function getChartData(): array
+    private function getChartData($rw = null): array
     {
         $year = now()->year;
         $months = [];
@@ -64,13 +84,21 @@ class DashboardController extends Controller
                 continue;
             }
 
-            $totalLansia = Lansia::count();
+            $lansiaQuery = Lansia::query();
+
+            if ($rw) {
+                $lansiaQuery->where('rw', $rw);
+            }
+
+            $totalLansia = $lansiaQuery->count();
+            $lansiaIds = $lansiaQuery->pluck('id');
             if ($totalLansia === 0) {
                 $data[] = 0;
                 continue;
             }
 
             $totalHadir = Kehadiran::whereIn('kegiatan_id', $kegiatanBulanIni)
+                ->whereIn('lansia_id', $lansiaIds)
                 ->where('status', 'Hadir')
                 ->count();
 
@@ -84,9 +112,15 @@ class DashboardController extends Controller
         ];
     }
 
-    private function getPieData(): array
+    private function getPieData($rw = null): array
     {
-        $lansias = Lansia::all();
+        $query = Lansia::query();
+
+        if ($rw) {
+            $query->where('rw', $rw);
+        }
+
+        $lansias = $query->get();
         $kategori = [
             'Sangat Aktif' => 0,
             'Aktif' => 0,

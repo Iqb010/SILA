@@ -22,6 +22,20 @@
                     @endforeach
                 </select>
             </div>
+             <div class="col-md-3">
+                <select name="rw" class="form-select" onchange="this.form.submit()">
+
+                    <option value="">Semua RW</option>
+
+                    @foreach($daftarRw as $rw)
+                        <option value="{{ $rw }}"
+                            {{ request('rw') == $rw ? 'selected' : '' }}>
+                            RW {{ $rw }}
+                        </option>
+                    @endforeach
+
+                </select>
+            </div>
         </form>
     </div>
 </div>

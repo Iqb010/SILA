@@ -10,6 +10,11 @@
         @error('nik') <div class="invalid-feedback">{{ $message }}</div> @enderror
     </div>
     <div class="col-md-6">
+        <label for="rw" class="form-label">RW <span class="text-danger">*</span></label>
+        <input type="text" class="form-control @error('rw') is-invalid @enderror" id="rw" name="rw" value="{{ old('rw', $lansia->rw ?? '') }}" required>
+        @error('rw') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    </div>
+    <div class="col-md-6">
         <label for="jenis_kelamin" class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
         <select class="form-select @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin" name="jenis_kelamin" required>
             <option value="">-- Pilih --</option>

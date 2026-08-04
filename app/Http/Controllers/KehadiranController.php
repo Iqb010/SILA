@@ -16,16 +16,27 @@ class KehadiranController extends Controller
         $lansias = collect();
         $kehadiranMap = [];
 
+        $daftarRw = Lansia::select('rw')
+                ->distinct()
+                ->orderBy('rw')
+                ->pluck('rw');
+
         if ($request->filled('kegiatan_id')) {
             $selectedKegiatan = Kegiatan::findOrFail($request->kegiatan_id);
-            $lansias = Lansia::orderBy('nama')->get();
+            $query = Lansia::query();
+
+            if ($request->filled('rw')) {
+                $query->where('rw', $request->rw);
+            }
+
+            $lansias = $query->orderBy('nama')->get();
 
             $kehadiranMap = Kehadiran::where('kegiatan_id', $selectedKegiatan->id)
                 ->pluck('status', 'lansia_id')
                 ->toArray();
         }
 
-        return view('kehadiran.index', compact('kegiatans', 'selectedKegiatan', 'lansias', 'kehadiranMap'));
+        return view('kehadiran.index', compact('kegiatans', 'selectedKegiatan', 'lansias', 'kehadiranMap', 'daftarRw'));
     }
 
     public function store(Request $request)

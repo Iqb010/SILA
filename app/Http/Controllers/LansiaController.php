@@ -20,9 +20,18 @@ class LansiaController extends Controller
             });
         }
 
+        if ($request->filled('rw')) {
+            $query->where('rw', $request->rw);
+        }
+
+        $daftarRw = Lansia::select('rw')
+        ->distinct()
+        ->orderBy('rw')
+        ->pluck('rw');
+
         $lansias = $query->orderBy('nama')->paginate(10)->withQueryString();
 
-        return view('lansia.index', compact('lansias'));
+        return view('lansia.index', compact('lansias', 'daftarRw'));
     }
 
     public function create()
@@ -35,6 +44,7 @@ class LansiaController extends Controller
         $validated = $request->validate([
             'nama' => ['required', 'string', 'max:255'],
             'nik' => ['required', 'string', 'size:16', 'unique:lansias,nik'],
+            'rw' => ['required', 'string', 'max:255'],
             'jenis_kelamin' => ['required', 'in:Laki-laki,Perempuan'],
             'tanggal_lahir' => ['required', 'date', 'before:today'],
             'alamat' => ['required', 'string'],
@@ -63,6 +73,7 @@ class LansiaController extends Controller
         $validated = $request->validate([
             'nama' => ['required', 'string', 'max:255'],
             'nik' => ['required', 'string', 'size:16', 'unique:lansias,nik,' . $lansia->id],
+            'rw' => ['required', 'string', 'max:255'],
             'jenis_kelamin' => ['required', 'in:Laki-laki,Perempuan'],
             'tanggal_lahir' => ['required', 'date', 'before:today'],
             'alamat' => ['required', 'string'],

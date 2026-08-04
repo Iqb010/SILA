@@ -29,12 +29,26 @@
                     @endforeach
                 </select>
             </div>
+            <div class="col-md-3">
+                <select name="rw" class="form-select" onchange="this.form.submit()">
+
+                    <option value="">Semua RW</option>
+
+                    @foreach($daftarRw as $rw)
+                        <option value="{{ $rw }}"
+                            {{ request('rw') == $rw ? 'selected' : '' }}>
+                            RW {{ $rw }}
+                        </option>
+                    @endforeach
+
+                </select>
+            </div>
             <div class="col-md-6 d-flex gap-2 flex-wrap">
                 <button type="submit" class="btn-accent ripple-btn"><i class="bi bi-funnel me-1"></i> Filter</button>
-                <a href="{{ route('laporan.export-pdf', ['bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn-glass" style="color:#ef4444;border-color:rgba(239,68,68,0.2);">
+                <a href="{{ route('laporan.export-pdf', ['bulan' => $bulan, 'tahun' => $tahun, 'rw' => $rw]) }}" class="btn-glass" style="color:#ef4444;border-color:rgba(239,68,68,0.2);">
                     <i class="bi bi-file-earmark-pdf me-1"></i> Export PDF
                 </a>
-                <a href="{{ route('laporan.export-excel', ['bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn-glass" style="color:var(--accent);border-color:rgba(16,185,129,0.2);">
+                <a href="{{ route('laporan.export-excel', ['bulan' => $bulan, 'tahun' => $tahun, 'rw' => $rw]) }}" class="btn-glass" style="color:var(--accent);border-color:rgba(16,185,129,0.2);">
                     <i class="bi bi-file-earmark-spreadsheet me-1"></i> Export Excel
                 </a>
             </div>
